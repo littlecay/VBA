@@ -1,0 +1,25 @@
+Sub test()
+    Dim c As Integer
+    Dim shp As InlineShape
+    Dim sp As Shape
+    c = 0
+    For i = 1 To ActiveDocument.InlineShapes.Count
+     Set shp = ActiveDocument.InlineShapes(i)
+      If Not shp.LinkFormat Is Nothing Then
+       If Not shp.LinkFormat.SavePictureWithDocument Then
+        c = c + 1
+        shp.LinkFormat.SavePictureWithDocument = True
+       End If
+      End If
+     Next i
+    For i = 1 To ActiveDocument.Shapes.Count
+     Set sp = ActiveDocument.Shapes(i)
+      If Not sp.LinkFormat Is Nothing Then
+       If Not sp.LinkFormat.SavePictureWithDocument Then
+        c = c + 1
+        sp.LinkFormat.SavePictureWithDocument = True
+       End If
+      End If
+     Next i
+    MsgBox CStr(c) + "个图片改为与文档一起保存"
+End Sub
